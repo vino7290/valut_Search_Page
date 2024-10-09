@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .search-container {
+            text-align: center;
+        }
+        .search-bar {
+            width: 400px;
+            padding: 10px;
+            border-radius: 24px;
+            border: 1px solid #dcdcdc;
+            font-size: 18px;
+            outline: none;
+        }
+        .search-button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: 18px;
+            border: none;
+            background-color: #4285f4;
+            color: white;
+            border-radius: 24px;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+        }
+        .search-button:hover {
+            background-color: #357ae8;
+        }
+
+        /* Spinner styling */
+        .spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s ease infinite;
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Spinner animation */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Show spinner when loading */
+        .loading .spinner {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h1>Search</h1>
+        <input type="text" class="search-bar" id="search-input" placeholder="Search the web...">
+        <button class="search-button" id="search-button" onclick="performSearch()">
+            Search
+            <div class="spinner"></div>
+        </button>
+    </div>
+
+    <script>
+        function performSearch() {
+            const query = document.getElementById('search-input').value;
+            const searchButton = document.getElementById('search-button');
+
+            if (query) {
+                // Show the spinner
+                searchButton.classList.add('loading');
+
+                // Simulate search operation (You can replace this with actual search logic)
+                setTimeout(() => {
+                    // After the search operation completes, remove the loading class
+                    searchButton.classList.remove('loading');
+
+                    // Open the search in a new tab (Google Search as an example)
+                    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                    window.open(searchUrl, '_blank');
+                }, 2000); // Simulate a 2-second delay for search
+            } else {
+                alert('Please enter a search query');
+            }
+        }
+    </script>
+</body>
+</html>
